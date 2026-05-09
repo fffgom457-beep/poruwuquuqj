@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>BattleRoll Loading</title>
+<style>
+body{
+background:#0b1020;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+font-family:sans-serif;
+overflow:hidden;
+}
+.box{
+width:320px;
+padding:30px;
+border-radius:30px;
+background:rgba(255,255,255,.05);
+backdrop-filter:blur(10px);
+text-align:center;
+}
+.bar{
+height:10px;
+background:#222;
+border-radius:20px;
+overflow:hidden;
+margin-top:20px;
+}
+.fill{
+height:100%;
+width:0%;
+background:linear-gradient(90deg,#5b8cff,#9d4dff);
+animation:load 5s linear forwards;
+}
+@keyframes load{
+from{width:0%}
+to{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>BattleRoll</h1>
+<p>Loading Mini App...</p>
+<div class="bar">
+<div class="fill"></div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+
+UI STYLE:
+- Telegram Premium Style
+- Dark Blue/Purple
+- Glassmorphism
+- Rounded Cards
+- Animated Loading
+- Live Counters
+- NFT Cards
