@@ -238,6 +238,7 @@ flex-direction:column;
 align-items:center;
 font-size:14px;
 opacity:.85;
+cursor:pointer;
 }
 
 .nav-item span{
@@ -268,6 +269,50 @@ opacity:.8;
 font-size:18px;
 }
 
+.page{
+display:none;
+animation:fade .4s ease;
+}
+
+.active{
+display:block;
+}
+
+.case-box{
+height:150px;
+border-radius:30px;
+padding:25px;
+margin-bottom:20px;
+background:
+linear-gradient(135deg,#7640ff,#2cecff);
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 0 30px rgba(80,110,255,.3);
+}
+
+.case-box h2{
+font-size:42px;
+}
+
+.case-box span{
+font-size:70px;
+}
+
+.profile-box{
+padding:25px;
+border-radius:30px;
+margin-bottom:20px;
+background:
+rgba(255,255,255,.05);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.06);
+}
+
+.profile-box h2{
+margin-bottom:10px;
+}
+
 @keyframes pulse{
 0%{transform:scale(1);}
 50%{transform:scale(1.05);}
@@ -277,7 +322,7 @@ font-size:18px;
 @keyframes fade{
 from{
 opacity:0;
-transform:translateY(15px);
+transform:translateY(10px);
 }
 to{
 opacity:1;
@@ -312,6 +357,8 @@ transform:translateY(0);
 
 <div class="main" id="main">
 
+<div id="home" class="page active">
+
 <div class="header">
 
 <div class="app-title">
@@ -326,10 +373,8 @@ BattleRoll
 
 <div class="news">
 
-<div>
 <div class="news-title">
 📰 Новости
-</div>
 </div>
 
 <a class="news-link"
@@ -339,7 +384,7 @@ href="https://t.me/CaveLlKA">
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openPage('cases')">
 
 <h2>CASES</h2>
 
@@ -353,7 +398,7 @@ href="https://t.me/CaveLlKA">
 
 </div>
 
-<div class="card">
+<div class="card" onclick="openPage('crash')">
 
 <h2>CRASH</h2>
 
@@ -395,24 +440,116 @@ href="https://t.me/CaveLlKA">
 
 </div>
 
+<div id="cases" class="page">
+
+<h1 style="font-size:48px;margin-bottom:25px;">
+🎁 Cases
+</h1>
+
+<div class="case-box">
+<div>
+<h2>PREMIUM</h2>
+<p>NFT Gift Case</p>
+</div>
+
+<span>👑</span>
+</div>
+
+<div class="case-box">
+<div>
+<h2>LEGEND</h2>
+<p>Rare Telegram Gifts</p>
+</div>
+
+<span>💎</span>
+</div>
+
+</div>
+
+<div id="crash" class="page">
+
+<h1 style="font-size:48px;margin-bottom:25px;">
+🚀 Crash
+</h1>
+
+<div class="premium">
+
+<h3>
+x1.42
+</h3>
+
+<p>
+Ракета летит вверх...
+</p>
+
+</div>
+
+</div>
+
+<div id="profile" class="page">
+
+<h1 style="font-size:48px;margin-bottom:25px;">
+⚙️ Профиль
+</h1>
+
+<div class="profile-box">
+
+<h2>
+👤 @username
+</h2>
+
+<p>
+ID: 8506904600
+</p>
+
+</div>
+
+<div class="profile-box">
+
+<h2>
+🛡️ Роль
+</h2>
+
+<p>
+ADMIN LEVEL 100
+</p>
+
+</div>
+
+<div class="profile-box">
+
+<h2>
+⭐ Баланс
+</h2>
+
+<p>
+15 240 Telegram Stars
+</p>
+
+</div>
+
+</div>
+
+</div>
+
 <div class="bottom">
 
-<div class="nav-item">
+<div class="nav-item" onclick="openPage('home')">
 <span>🏠</span>
 Главная
 </div>
 
-<div class="nav-item">
+<div class="nav-item" onclick="openPage('cases')">
 <span>🎁</span>
 Кейсы
 </div>
 
-<div class="nav-item">
+<div class="nav-item" onclick="openPage('crash')">
 <span>🚀</span>
 Crash
 </div>
 
-<div class="nav-item">
+<div class="nav-item" onclick="openPage('profile')">
 <span>⚙️</span>
 Профиль
 </div>
@@ -457,7 +594,20 @@ document.getElementById("main")
 
 }
 
-},35);
+},30);
+
+function openPage(page){
+
+const pages = document.querySelectorAll(".page");
+
+pages.forEach(p => {
+p.classList.remove("active");
+});
+
+document.getElementById(page)
+.classList.add("active");
+
+}
 
 </script>
 
