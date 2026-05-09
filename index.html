@@ -313,6 +313,34 @@ border:1px solid rgba(255,255,255,.06);
 margin-bottom:10px;
 }
 
+.open-btn{
+margin-top:20px;
+width:100%;
+height:72px;
+border:none;
+border-radius:24px;
+font-size:24px;
+font-weight:bold;
+color:white;
+background:
+linear-gradient(90deg,#4f6fff,#28e7ff);
+box-shadow:0 0 30px rgba(79,111,255,.4);
+cursor:pointer;
+}
+
+.drop-box{
+margin-top:25px;
+padding:25px;
+border-radius:30px;
+background:
+rgba(255,255,255,.06);
+backdrop-filter:blur(20px);
+text-align:center;
+font-size:28px;
+font-weight:bold;
+border:1px solid rgba(255,255,255,.08);
+}
+
 @keyframes pulse{
 0%{transform:scale(1);}
 50%{transform:scale(1.05);}
@@ -455,14 +483,16 @@ href="https://t.me/CaveLlKA">
 <span>👑</span>
 </div>
 
-<div class="case-box">
-<div>
-<h2>LEGEND</h2>
-<p>Rare Telegram Gifts</p>
+<div class="drop-box" id="dropText">
+Нажми чтобы открыть кейс
 </div>
 
-<span>💎</span>
-</div>
+<button class="open-btn"
+onclick="openCase()">
+
+OPEN CASE
+
+</button>
 
 </div>
 
@@ -474,8 +504,8 @@ href="https://t.me/CaveLlKA">
 
 <div class="premium">
 
-<h3>
-x1.42
+<h3 id="crashMultiplier">
+x1.00
 </h3>
 
 <p>
@@ -483,6 +513,13 @@ x1.42
 </p>
 
 </div>
+
+<button class="open-btn"
+onclick="startCrash()">
+
+START CRASH
+
+</button>
 
 </div>
 
@@ -598,7 +635,8 @@ document.getElementById("main")
 
 function openPage(page){
 
-const pages = document.querySelectorAll(".page");
+const pages =
+document.querySelectorAll(".page");
 
 pages.forEach(p => {
 p.classList.remove("active");
@@ -606,6 +644,76 @@ p.classList.remove("active");
 
 document.getElementById(page)
 .classList.add("active");
+
+}
+
+function openCase(){
+
+const rewards = [
+
+"⭐ 250 Telegram Stars",
+"🎁 Valentine NFT",
+"💎 Rare Gift",
+"👑 Premium 24h",
+"⭐ 1000 Stars",
+"🔥 Legendary NFT"
+
+];
+
+const randomReward =
+rewards[Math.floor(Math.random() * rewards.length)];
+
+const drop =
+document.getElementById("dropText");
+
+drop.innerText = "Открытие...";
+
+let dots = 0;
+
+const anim = setInterval(() => {
+
+dots++;
+
+drop.innerText =
+"Открытие" + ".".repeat(dots % 4);
+
+},200);
+
+setTimeout(() => {
+
+clearInterval(anim);
+
+drop.innerText =
+"Выпало: " + randomReward;
+
+},2500);
+
+}
+
+function startCrash(){
+
+let value = 1.00;
+
+const crash =
+document.getElementById("crashMultiplier");
+
+const game = setInterval(() => {
+
+value += 0.05;
+
+crash.innerText =
+"x" + value.toFixed(2);
+
+if(value >= 4){
+
+clearInterval(game);
+
+crash.innerText =
+"💥 CRASHED AT x" + value.toFixed(2);
+
+}
+
+},120);
 
 }
 
