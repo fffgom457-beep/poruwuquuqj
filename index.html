@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BattleRoll</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+overflow:hidden;
+font-family:Arial;
+background:
+radial-gradient(circle at top,#243bff,#050816);
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.screen{
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+.logo{
+width:120px;
+height:120px;
+border-radius:35px;
+background:#3f5fff;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:50px;
+box-shadow:0 0 50px #4d6fff;
+animation:pulse 2s infinite;
+}
+
+.title{
+font-size:48px;
+margin-top:25px;
+font-weight:bold;
+}
+
+.sub{
+opacity:.7;
+margin-bottom:70px;
+}
+
+.bar{
+width:320px;
+height:18px;
+background:#111827;
+border-radius:30px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+width:0%;
+background:
+linear-gradient(90deg,#2cecff,#4c6fff);
+border-radius:30px;
+animation:load 5s forwards;
+}
+
+.percent{
+font-size:36px;
+font-weight:bold;
+margin-top:20px;
+}
+
+@keyframes load{
+from{width:0%;}
+to{width:100%;}
+}
+
+@keyframes pulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.06);}
+100%{transform:scale(1);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+<div class="logo">⚔️</div>
+
+<div class="title">BattleRoll</div>
+
+<div class="sub">
+У нас есть чем заняться!
+</div>
+
+<div class="bar">
+<div class="fill"></div>
+</div>
+
+<div class="percent" id="percent">
+0%
+</div>
+
+</div>
+
+<script>
+
+let percent = 0;
+
+const interval = setInterval(() => {
+
+percent++;
+
+document.getElementById("percent")
+.innerText = percent + "%";
+
+if(percent >= 100){
+clearInterval(interval);
+}
+
+},50);
+
+</script>
+
+</body>
+</
