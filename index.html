@@ -7,23 +7,30 @@
 
 <style>
 
-body{
+*{
 margin:0;
-height:100vh;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
 overflow:hidden;
-font-family:Arial;
-background:
-radial-gradient(circle at top,#243bff,#050816);
+background:#050816;
 color:white;
+}
+
+.loading-screen{
+position:fixed;
+width:100%;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-}
-
-.screen{
-display:flex;
 flex-direction:column;
-align-items:center;
+background:
+radial-gradient(circle at top,#243bff,#050816);
+z-index:999;
 }
 
 .logo{
@@ -34,20 +41,21 @@ background:#3f5fff;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:50px;
-box-shadow:0 0 50px #4d6fff;
+font-size:52px;
+box-shadow:0 0 60px #4d6fff;
 animation:pulse 2s infinite;
 }
 
 .title{
-font-size:48px;
-margin-top:25px;
+font-size:58px;
 font-weight:bold;
+margin-top:25px;
 }
 
 .sub{
 opacity:.7;
 margin-bottom:70px;
+font-size:20px;
 }
 
 .bar{
@@ -64,18 +72,87 @@ width:0%;
 background:
 linear-gradient(90deg,#2cecff,#4c6fff);
 border-radius:30px;
-animation:load 5s forwards;
 }
 
 .percent{
-font-size:36px;
+font-size:42px;
 font-weight:bold;
 margin-top:20px;
 }
 
-@keyframes load{
-from{width:0%;}
-to{width:100%;}
+.main{
+display:none;
+height:100vh;
+padding:25px;
+background:
+linear-gradient(180deg,#08112f,#050816);
+}
+
+.header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.balance{
+background:#121d4b;
+padding:12px 20px;
+border-radius:20px;
+font-size:20px;
+font-weight:bold;
+}
+
+.card{
+height:170px;
+border-radius:30px;
+padding:25px;
+margin-bottom:20px;
+background:
+linear-gradient(135deg,#5a2dff,#2cecff);
+box-shadow:0 0 30px rgba(76,111,255,.4);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.card h2{
+font-size:42px;
+}
+
+.card p{
+opacity:.8;
+margin-top:10px;
+}
+
+.icon{
+font-size:70px;
+}
+
+.nav{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+height:90px;
+background:#091126;
+display:flex;
+justify-content:space-around;
+align-items:center;
+border-top:1px solid rgba(255,255,255,.1);
+}
+
+.nav-item{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:14px;
+opacity:.8;
+}
+
+.nav-item span{
+font-size:26px;
+margin-bottom:4px;
 }
 
 @keyframes pulse{
@@ -89,7 +166,7 @@ to{width:100%;}
 
 <body>
 
-<div class="screen">
+<div class="loading-screen" id="loading">
 
 <div class="logo">⚔️</div>
 
@@ -100,7 +177,7 @@ to{width:100%;}
 </div>
 
 <div class="bar">
-<div class="fill"></div>
+<div class="fill" id="fill"></div>
 </div>
 
 <div class="percent" id="percent">
@@ -109,9 +186,76 @@ to{width:100%;}
 
 </div>
 
+<div class="main" id="main">
+
+<div class="header">
+
+<h1>BattleRoll</h1>
+
+<div class="balance">
+⭐ 15 240
+</div>
+
+</div>
+
+<div class="card">
+<div>
+<h2>CASES</h2>
+<p>Открывай кейсы и получай NFT</p>
+</div>
+
+<div class="icon">🎁</div>
+</div>
+
+<div class="card">
+<div>
+<h2>CRASH</h2>
+<p>Успей забрать выигрыш</p>
+</div>
+
+<div class="icon">🚀</div>
+</div>
+
+<div class="card">
+<div>
+<h2>MINES</h2>
+<p>Найди безопасные клетки</p>
+</div>
+
+<div class="icon">💣</div>
+</div>
+
+<div class="nav">
+
+<div class="nav-item">
+<span>🏠</span>
+Главная
+</div>
+
+<div class="nav-item">
+<span>🎁</span>
+Кейсы
+</div>
+
+<div class="nav-item">
+<span>🚀</span>
+Crash
+</div>
+
+<div class="nav-item">
+<span>⚙️</span>
+Профиль
+</div>
+
+</div>
+
+</div>
+
 <script>
 
 let percent = 0;
+
+const fill = document.getElementById("fill");
 
 const interval = setInterval(() => {
 
@@ -120,13 +264,28 @@ percent++;
 document.getElementById("percent")
 .innerText = percent + "%";
 
+fill.style.width = percent + "%";
+
 if(percent >= 100){
+
 clearInterval(interval);
+
+setTimeout(() => {
+
+document.getElementById("loading")
+.style.display = "none";
+
+document.getElementById("main")
+.style.display = "block";
+
+},1000);
+
 }
 
-},50);
+},40);
 
 </script>
 
 </body>
-</
+</html>
+``
