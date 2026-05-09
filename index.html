@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BattleRoll</title>
+<title>BattleRoll Premium</title>
 
 <style>
 
@@ -11,135 +11,225 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
+background:#040816;
 font-family:Arial,sans-serif;
-overflow:hidden;
-background:#050816;
 color:white;
+overflow-x:hidden;
 }
 
-.loading-screen{
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top,#304dff 0%,#040816 55%);
+z-index:-2;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:600px;
+height:600px;
+background:#355bff;
+filter:blur(180px);
+top:-250px;
+left:50%;
+transform:translateX(-50%);
+opacity:.5;
+z-index:-1;
+}
+
+.loading{
 position:fixed;
 width:100%;
 height:100vh;
+background:#040816;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-background:
-radial-gradient(circle at top,#243bff,#050816);
-z-index:999;
+z-index:9999;
+transition:.6s;
 }
 
 .logo{
-width:120px;
-height:120px;
-border-radius:35px;
-background:#3f5fff;
+width:130px;
+height:130px;
+border-radius:40px;
+background:
+linear-gradient(145deg,#4162ff,#5676ff);
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:52px;
-box-shadow:0 0 60px #4d6fff;
+font-size:58px;
+box-shadow:
+0 0 60px rgba(78,109,255,.8),
+0 0 120px rgba(78,109,255,.4);
 animation:pulse 2s infinite;
 }
 
 .title{
-font-size:58px;
-font-weight:bold;
+font-size:62px;
+font-weight:800;
 margin-top:25px;
+letter-spacing:-2px;
 }
 
-.sub{
+.subtitle{
 opacity:.7;
-margin-bottom:70px;
 font-size:20px;
+margin-top:8px;
+margin-bottom:70px;
 }
 
-.bar{
+.progress{
 width:320px;
-height:18px;
-background:#111827;
-border-radius:30px;
+height:16px;
+background:rgba(255,255,255,.08);
+border-radius:40px;
 overflow:hidden;
+backdrop-filter:blur(20px);
 }
 
-.fill{
+.progress-fill{
 height:100%;
 width:0%;
+border-radius:40px;
 background:
-linear-gradient(90deg,#2cecff,#4c6fff);
-border-radius:30px;
+linear-gradient(90deg,#28e7ff,#5f7dff);
+box-shadow:0 0 25px #4d73ff;
 }
 
 .percent{
+margin-top:20px;
 font-size:42px;
 font-weight:bold;
-margin-top:20px;
 }
 
 .main{
 display:none;
-height:100vh;
-padding:25px;
-background:
-linear-gradient(180deg,#08112f,#050816);
+padding:24px;
+padding-bottom:120px;
+animation:fade .6s ease;
 }
 
 .header{
 display:flex;
 justify-content:space-between;
 align-items:center;
+margin-top:10px;
 margin-bottom:30px;
 }
 
-.balance{
-background:#121d4b;
-padding:12px 20px;
-border-radius:20px;
-font-size:20px;
-font-weight:bold;
+.app-title{
+font-size:54px;
+font-weight:800;
+letter-spacing:-2px;
 }
 
-.card{
-height:170px;
-border-radius:30px;
-padding:25px;
-margin-bottom:20px;
+.balance{
+padding:14px 22px;
+border-radius:24px;
+background:rgba(23,33,82,.7);
+backdrop-filter:blur(25px);
+font-size:26px;
+font-weight:bold;
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 0 25px rgba(53,91,255,.25);
+}
+
+.news{
+margin-bottom:25px;
+padding:18px 22px;
+border-radius:24px;
 background:
-linear-gradient(135deg,#5a2dff,#2cecff);
-box-shadow:0 0 30px rgba(76,111,255,.4);
+linear-gradient(145deg,
+rgba(80,110,255,.25),
+rgba(37,230,255,.12));
+backdrop-filter:blur(25px);
 display:flex;
 justify-content:space-between;
 align-items:center;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.news-title{
+font-size:22px;
+font-weight:bold;
+}
+
+.news-link{
+color:#59e8ff;
+text-decoration:none;
+font-size:18px;
+}
+
+.card{
+position:relative;
+height:190px;
+border-radius:38px;
+padding:30px;
+margin-bottom:24px;
+overflow:hidden;
+background:
+linear-gradient(135deg,#5a2dff,#2cecff);
+box-shadow:
+0 0 45px rgba(68,108,255,.35),
+inset 0 0 60px rgba(255,255,255,.06);
+}
+
+.card::before{
+content:"";
+position:absolute;
+width:280px;
+height:280px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+right:-80px;
+top:-80px;
 }
 
 .card h2{
-font-size:42px;
+font-size:62px;
+font-weight:800;
+position:relative;
+z-index:2;
 }
 
 .card p{
-opacity:.8;
-margin-top:10px;
+margin-top:14px;
+font-size:24px;
+opacity:.88;
+position:relative;
+z-index:2;
 }
 
-.icon{
-font-size:70px;
+.card-icon{
+position:absolute;
+right:28px;
+bottom:10px;
+font-size:95px;
+filter:drop-shadow(0 0 15px rgba(255,255,255,.3));
 }
 
-.nav{
+.bottom{
 position:fixed;
-bottom:0;
 left:0;
+bottom:0;
 width:100%;
-height:90px;
-background:#091126;
+height:95px;
+background:rgba(7,12,28,.92);
+backdrop-filter:blur(30px);
 display:flex;
 justify-content:space-around;
 align-items:center;
-border-top:1px solid rgba(255,255,255,.1);
+border-top:1px solid rgba(255,255,255,.08);
 }
 
 .nav-item{
@@ -147,18 +237,52 @@ display:flex;
 flex-direction:column;
 align-items:center;
 font-size:14px;
-opacity:.8;
+opacity:.85;
 }
 
 .nav-item span{
-font-size:26px;
+font-size:28px;
 margin-bottom:4px;
+}
+
+.premium{
+margin-top:10px;
+padding:24px;
+border-radius:34px;
+background:
+linear-gradient(135deg,
+rgba(255,215,0,.22),
+rgba(255,255,255,.08));
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,.08);
+box-shadow:0 0 35px rgba(255,215,0,.18);
+}
+
+.premium h3{
+font-size:34px;
+margin-bottom:10px;
+}
+
+.premium p{
+opacity:.8;
+font-size:18px;
 }
 
 @keyframes pulse{
 0%{transform:scale(1);}
-50%{transform:scale(1.06);}
+50%{transform:scale(1.05);}
 100%{transform:scale(1);}
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
 }
 
 </style>
@@ -166,18 +290,18 @@ margin-bottom:4px;
 
 <body>
 
-<div class="loading-screen" id="loading">
+<div class="loading" id="loading">
 
 <div class="logo">⚔️</div>
 
 <div class="title">BattleRoll</div>
 
-<div class="sub">
+<div class="subtitle">
 У нас есть чем заняться!
 </div>
 
-<div class="bar">
-<div class="fill" id="fill"></div>
+<div class="progress">
+<div class="progress-fill" id="fill"></div>
 </div>
 
 <div class="percent" id="percent">
@@ -190,7 +314,9 @@ margin-bottom:4px;
 
 <div class="header">
 
-<h1>BattleRoll</h1>
+<div class="app-title">
+BattleRoll
+</div>
 
 <div class="balance">
 ⭐ 15 240
@@ -198,34 +324,78 @@ margin-bottom:4px;
 
 </div>
 
-<div class="card">
+<div class="news">
+
 <div>
+<div class="news-title">
+📰 Новости
+</div>
+</div>
+
+<a class="news-link"
+href="https://t.me/CaveLlKA">
+Открыть →
+</a>
+
+</div>
+
+<div class="card">
+
 <h2>CASES</h2>
-<p>Открывай кейсы и получай NFT</p>
+
+<p>
+Открывай кейсы и получай NFT
+</p>
+
+<div class="card-icon">
+🎁
 </div>
 
-<div class="icon">🎁</div>
 </div>
 
 <div class="card">
-<div>
+
 <h2>CRASH</h2>
-<p>Успей забрать выигрыш</p>
+
+<p>
+Успей забрать выигрыш
+</p>
+
+<div class="card-icon">
+🚀
 </div>
 
-<div class="icon">🚀</div>
 </div>
 
 <div class="card">
-<div>
+
 <h2>MINES</h2>
-<p>Найди безопасные клетки</p>
+
+<p>
+Найди безопасные клетки
+</p>
+
+<div class="card-icon">
+💣
 </div>
 
-<div class="icon">💣</div>
 </div>
 
-<div class="nav">
+<div class="premium">
+
+<h3>
+👑 Premium активирован
+</h3>
+
+<p>
+Новым пользователям выдан Premium на 1 час
+</p>
+
+</div>
+
+</div>
+
+<div class="bottom">
 
 <div class="nav-item">
 <span>🏠</span>
@@ -245,8 +415,6 @@ Crash
 <div class="nav-item">
 <span>⚙️</span>
 Профиль
-</div>
-
 </div>
 
 </div>
@@ -273,19 +441,25 @@ clearInterval(interval);
 setTimeout(() => {
 
 document.getElementById("loading")
+.style.opacity = "0";
+
+setTimeout(() => {
+
+document.getElementById("loading")
 .style.display = "none";
 
 document.getElementById("main")
 .style.display = "block";
 
-},1000);
+},600);
+
+},500);
 
 }
 
-},40);
+},35);
 
 </script>
 
 </body>
 </html>
-``
